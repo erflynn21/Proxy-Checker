@@ -1,61 +1,14 @@
 import requests
+from shared import getProductName, getProxyURL
+import json
 
-def servicesMenu():
-    print('[1] Unmetered Residential')
-    print('[2] Premium GEO Residential')
-    print('[3] Private Residential')
-    print('[4] Mobile Proxies')
-    print('[5] USA Datacenter')
-    print('[6] Global Datacenter')
-    print('[7] Canada Datacenter')
-    print('[8] Static USA Datacenter')
+def checkIPInfo():
+    print('check IP info')
 
-def authMenu():
-    print('[1] Username/Password')
-    print('[2] IP Whitelisting')
+def checkCountryInfo(product, port):
+    country = input('Country Abbreviation: ')
 
-def checkCountryInfo(service, country):
-    if service == 1:
-        proxy = {
-            'https': 'http://megaproxy.rotating.proxyrack.net:222',
-            'http': 'http://megaproxy.rotating.proxyrack.net:222'
-        }
-    elif service == 2:
-        proxy = {
-            'https': 'http://premium.residential.proxyrack.net:9000',
-            'http': 'http://premium.residential.proxyrack.net:9000'
-        }
-    elif service == 3:
-        proxy = {
-            'https': 'http://private.residential.proxyrack.net:10000',
-            'http': 'http://private.residential.proxyrack.net:10000'
-        }
-    elif service == 4:
-        proxy = {
-            'https': 'http://us.mobile.proxyrack.net:10000',
-            'http': 'http://us.mobile.proxyrack.net:10000'
-        }
-    elif service == 5:
-        proxy = {
-            'https': 'usa.rotating.proxyrack.net:333',
-            'http': 'usa.rotating.proxyrack.net:333'
-        }
-    elif service == 6:
-        proxy = {
-            'https': 'mixed.rotating.proxyrack.net:444',
-            'http': 'mixed.rotating.proxyrack.net:444'
-        }
-    elif service == 7:
-        proxy = {
-            'https': 'canada.rotating.proxyrack.net:9000',
-            'http': 'canada.rotating.proxyrack.net:9000'
-        }        
-    elif service == 8:
-        proxy = {
-            'https': 'usa.shared.proxyrack.net:10000',
-            'http': 'canada.rotating.proxyrack.net:9000'
-        }   
-    
+    proxy = getProxyURL(product, port)
 
     url = 'http://api.proxyrack.net/countries/' + country + '/count'
 
@@ -63,9 +16,48 @@ def checkCountryInfo(service, country):
 
     print(r.json())
 
-servicesMenu()
-service = int(input('Enter which service you would like to test: '))
-# authMenu()
-# auth = int(input('What authentication method would you like to use: '))
-country = input('Country Abbreviation: ')
-checkCountryInfo(service, country)
+def getCountryList(product, port):
+    proxy = getProxyURL(product, port)
+
+    url = 'http://api.proxyrack.net/countries'
+
+    r = requests.get(url, proxies=proxy)
+    result = r.json()
+    results = ', '.join(result)
+    productName = getProductName(product)
+    print(f'We currently have {productName} IPs available in the following countries: {results}.')
+    # resultsString = *results, sep=', '
+    # print(f'We currently have {product} proxies available in the following countries: {resultsString}')
+
+def getCityList(product, port):
+    country = input('Country Abbreviation: ')
+
+    proxy = getProxyURL(product, port)
+
+    url = 'http://api.proxyrack.net/countries/' + country + '/cities'
+
+    r = requests.get(url, proxies=proxy)
+    results = json.loads(r.json())
+    print(results)
+    # print(results)
+
+
+def getISPList(product, port):
+    print(product)
+    print(port)
+
+def checkSessionsInfo(product, port):
+    print(product)
+    print(port)
+
+def releaseSession(product, port):
+    print(product)
+    print(port)
+
+def getStats(product, port):
+    print(product)
+    print(port)
+
+def getThreads(product, port):
+    print(product)
+    print(port)
