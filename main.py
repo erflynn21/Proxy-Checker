@@ -5,7 +5,7 @@ def servicesMenu():
     print('[2] Check Number of IPs in a Country')
     print('[3] Get List of Available Countries')
     print('[4] Get List of Available Cities')
-    print('[5] Check Number of IPs for an ISP')
+    print('[5] Get List of Available ISPs')
     print('[6] Check Sessions Information')
     print('[7] Release a Sticky Session')
     print('[8] Get Stats')

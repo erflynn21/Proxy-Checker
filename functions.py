@@ -42,8 +42,17 @@ def getCityList(product, port):
     print(f'We currently have {productName} IPs available in the following {country} cities: {results}.')
 
 def getISPList(product, port):
-    print(product)
-    print(port)
+    country = input('Country Abbreviation: ')
+
+    proxy = getProxyURL(product, port)
+
+    url = 'http://api.proxyrack.net/countries/' + country + '/isps'
+
+    r = requests.get(url, proxies=proxy)
+    result = r.json()
+    results = ', '.join(result)
+    productName = getProductName(product)
+    print(f'We currently have {productName} IPs available with the following {country} ISPs: {results}.')
 
 def checkSessionsInfo(product, port):
     print(product)
