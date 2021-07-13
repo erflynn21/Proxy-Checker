@@ -2,8 +2,10 @@ import requests
 from shared import getProductName, getProxyURL
 import json
 
-def checkIPInfo():
-    print('check IP info')
+def checkIPInfo(product, port, auth):
+    print(product)
+    print(port)
+    print(auth)
 
 def checkCountryInfo(product, port):
     country = input('Country Abbreviation: ')
@@ -55,8 +57,13 @@ def getISPList(product, port):
     print(f'We currently have {productName} IPs available with the following {country} ISPs: {results}.')
 
 def checkSessionsInfo(product, port):
-    print(product)
-    print(port)
+    proxy = getProxyURL(product, port)
+
+    url = 'http://api.proxyrack.net/sessions'
+
+    r = requests.get(url, proxies=proxy)
+    result = r.json()
+    print(json.dumps(result, indent=2))
 
 def releaseSession(product, port):
     print(product)

@@ -42,11 +42,12 @@ else:
     port = int(input('Which type of port would you like to use: '))
     if port == 2:
         port = int(input('Which sticky port would you like to use: '))
-# authMenu()
-# auth = int(input('What authentication method would you like to use: '))
+
 
 if service == 1:
-    checkIPInfo(product, port)
+    authMenu()
+    auth = int(input('What authentication method would you like to use: '))
+    checkIPInfo(product, port, auth)
 elif service == 2:
     checkCountryInfo(product, port)
 elif service == 3:
