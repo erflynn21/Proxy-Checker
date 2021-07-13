@@ -66,8 +66,13 @@ def checkSessionsInfo(product, port):
     print(json.dumps(result, indent=2))
 
 def releaseSession(product, port):
-    print(product)
-    print(port)
+    proxy = getProxyURL(product, port)
+
+    url = 'http://api.proxyrack.net/release'
+
+    r = requests.get(url, proxies=proxy)
+    result = r.json()
+    print(json.dumps(result, indent=2))
 
 def getStats(product, port):
     print(product)
