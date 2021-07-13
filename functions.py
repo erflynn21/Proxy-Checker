@@ -75,9 +75,19 @@ def releaseSession(product, port):
     print(json.dumps(result, indent=2))
 
 def getStats(product, port):
-    print(product)
-    print(port)
+    proxy = getProxyURL(product, port)
+
+    url = 'http://api.proxyrack.net/stats'
+
+    r = requests.get(url, proxies=proxy)
+    result = r.json()
+    print(json.dumps(result, indent=2))
 
 def getThreads(product, port):
-    print(product)
-    print(port)
+    proxy = getProxyURL(product, port)
+
+    url = 'http://api.proxyrack.net/concurrent'
+
+    r = requests.get(url, proxies=proxy)
+    result = r.json()
+    print(json.dumps(result, indent=2))

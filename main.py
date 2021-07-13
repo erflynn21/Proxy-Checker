@@ -34,7 +34,7 @@ service = int(input('What would you like to do: '))
 
 productMenu()
 product = int(input('Enter which proxy product you would like to test: '))
-if (product == 3) or (product == 4) or (product == 8) or (service == 6) or (service == 7):
+if (product == 3) or (product == 4) or (product == 8) or (service == 6) or (service == 7) or (service == 8):
     port = 2
     port = int(input('Which sticky port would you like to use: '))
 else:
